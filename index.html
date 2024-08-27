@@ -135,6 +135,41 @@
             geolocate: maptilersdk.GeolocationType.POINT
         });
 
+        map.on('load', async function () {
+            const geojson = await maptilersdk.data.get('7188b22e-5d18-4516-8799-c3d6611bec43');
+            map.addSource('molduras_25k', {
+                'type': 'geojson',
+                'data': geojson
+            });
+            map.addLayer({
+                'id': 'cartas_25k_disponiveis',
+                'type': 'fill',
+                'source': 'molduras_25k',
+                'layout': {},
+                'paint': {
+                    'fill-color': 'rgb(255, 255, 255)',
+                    'fill-opacity': 0.8,
+                    'fill-outline-color': 'rgb(0, 0, 0)'
+                }
+            });
+        });
+
+
+
+        map.on('mousemove', function (e) {
+            document.getElementById('info').innerHTML =
+                // e.point is the x, y coordinates of the mousemove event relative
+                // to the top-left corner of the map
+                JSON.stringify(e.point) +
+                '<br />' +
+                // e.lngLat is the longitude, latitude geographical position of the event
+                JSON.stringify(e.lngLat.wrap());
+        });
+
+        map.on('mouseenter', element, function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
         const gc = new maptilersdkMaptilerGeocoder.GeocodingControl({});
 
         var draw = new MapboxDraw({
@@ -163,15 +198,9 @@
             style_code.length === 2 ? map.setStyle(maptilersdk.MapStyle[style_code[0]][style_code[1]]) : map.setStyle(maptilersdk.MapStyle[style_code[0]]);
         });
 
-        map.on('mousemove', function (e) {
-            document.getElementById('info').innerHTML =
-                // e.point is the x, y coordinates of the mousemove event relative
-                // to the top-left corner of the map
-                JSON.stringify(e.point) +
-                '<br />' +
-                // e.lngLat is the longitude, latitude geographical position of the event
-                JSON.stringify(e.lngLat.wrap());
-        });
+
+
+
 
         (async () => {
             const result = await maptilersdk.geolocation.info();
