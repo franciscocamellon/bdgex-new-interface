@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Display a map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.umd.js"></script>
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+    <script src="https://cdn.maptiler.com/maptiler-geocoding-control/v1.3.2/maptilersdk.umd.js"></script>
+    <link href="https://cdn.maptiler.com/maptiler-geocoding-control/v1.3.2/style.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.css"
+        type="text/css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav {
+            width: 220px;
+            background-color: rgba(244, 244, 244, 0.8);
+            padding: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 60px;
+            left: 10px;
+            z-index: 1000;
+            border-radius: 8px;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        #mapstyles {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        #info {
+            display: block;
+            position: relative;
+            margin: 0px auto;
+            width: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            text-align: center;
+            color:
+                #222;
+            background:
+                #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+        <h3>Selecione o estilo do mapa</h3>
+
+        <select name="mapstyles" id="mapstyles" class="form-select mapstyles-select"
+            style="background-color: rgba(244, 244, 244, 0.8);">
+            <optgroup label="Navigation and city exploration">
+                <option value="STREETS">STREETS</option>
+                <option value="STREETS.DARK">STREETS.DARK</option>
+                <option value="STREETS.LIGHT">STREETS.LIGHT</option>
+                <option value="STREETS.PASTEL">STREETS.PASTEL</option>
+            </optgroup>
+            <option value="OUTDOOR">OUTDOOR</option>
+            <option value="WINTER">WINTER</option>
+            <option value="SATELLITE">SATELLITE</option>
+            <option value="HYBRID" selected>HYBRID</option>
+            <optgroup label="Data visualization">
+                <option value="DATAVIZ">DATAVIZ</option>
+                <option value="DATAVIZ.DARK">DATAVIZ.DARK</option>
+                <option value="DATAVIZ.LIGHT">DATAVIZ.LIGHT</option>
+            </optgroup>
+            <optgroup label="Minimalist and general purpose">
+                <option value="BASIC">BASIC</option>
+                <option value="BASIC.DARK">BASIC.DARK</option>
+                <option value="BASIC.LIGHT">BASIC.LIGHT</option>
+            </optgroup>
+            <optgroup label="High contrast navigation">
+                <option value="BRIGHT">BRIGHT</option>
+                <option value="BRIGHT.DARK">BRIGHT.DARK</option>
+                <option value="BRIGHT.LIGHT">BRIGHT.LIGHT</option>
+                <option value="BRIGHT.PASTEL">BRIGHT.PASTEL</option>
+            </optgroup>
+            <optgroup label="Topographic study">
+                <option value="TOPO">TOPO</option>
+                <option value="TOPO.SHINY">TOPO.SHINY</option>
+                <option value="TOPO.PASTEL">TOPO.PASTEL</option>
+                <option value="TOPO.TOPOGRAPHIQUE">TOPO.TOPOGRAPHIQUE</option>
+            </optgroup>
+            <optgroup label="Minimalist">
+                <option value="VOYAGER">VOYAGER</option>
+                <option value="VOYAGER.DARK">VOYAGER.DARK</option>
+                <option value="VOYAGER.LIGHT">VOYAGER.LIGHT</option>
+                <option value="VOYAGER.VINTAGE">VOYAGER.VINTAGE</option>
+            </optgroup>
+            <optgroup label="High contrast">
+                <option value="TONER">TONER</option>
+                <option value="TONER.BACKGROUND">TONER.BACKGROUND</option>
+                <option value="TONER.LITE">TONER.LITE</option>
+                <option value="TONER.LINES">TONER.LINES</option>
+            </optgroup>
+            <optgroup label="Neutral greyscale style with hillshading">
+                <option value="BACKDROP">BACKDROP</option>
+                <option value="BACKDROP.DARK">BACKDROP.DARK</option>
+                <option value="BACKDROP.LIGHT">BACKDROP.LIGHT</option>
+            </optgroup>
+            <option value="OPENSTREETMAP">OPENSTREETMAP</option>
+        </select>
+    </nav>
+    <div id="map"></div>
+    <pre id="info"></pre>
+
+    <script>
+        maptilersdk.config.apiKey = 'Cvi2oCtCQVY3qFwOvaT3';
+        const map = new maptilersdk.Map({
+            container: 'map', // container id
+            style: maptilersdk.MapStyle.HYBRID,
+            //center: [-47.8849421, -15.7942931], // starting position [lng, lat]
+            //zoom: 15, // starting zoom
+            geolocate: maptilersdk.GeolocationType.POINT
+        });
+
+        const gc = new maptilersdkMaptilerGeocoder.GeocodingControl({});
+
+        var draw = new MapboxDraw({
+            displayControlsDefault: false,
+            controls: {
+                polygon: true,
+                trash: true
+            }
+        });
+
+        map.addControl(gc, 'top-left');
+        map.addControl(draw);
+
+        //fix conytrols style
+        const drawControls = document.querySelectorAll(".mapboxgl-ctrl-group.mapboxgl-ctrl");
+        drawControls.forEach((elem) => {
+            elem.classList.add('maplibregl-ctrl', 'maplibregl-ctrl-group');
+        });
+
+        map.on('draw.create', updateArea);
+        map.on('draw.delete', updateArea);
+        map.on('draw.update', updateArea);
+
+        document.getElementById('mapstyles').addEventListener('change', (e) => {
+            const style_code = e.target.value.split(".");
+            style_code.length === 2 ? map.setStyle(maptilersdk.MapStyle[style_code[0]][style_code[1]]) : map.setStyle(maptilersdk.MapStyle[style_code[0]]);
+        });
+
+        map.on('mousemove', function (e) {
+            document.getElementById('info').innerHTML =
+                // e.point is the x, y coordinates of the mousemove event relative
+                // to the top-left corner of the map
+                JSON.stringify(e.point) +
+                '<br />' +
+                // e.lngLat is the longitude, latitude geographical position of the event
+                JSON.stringify(e.lngLat.wrap());
+        });
+
+        (async () => {
+            const result = await maptilersdk.geolocation.info();
+            let { country_code } = result;
+            country_code = 'ES';
+            window.cookieconsent.initialise({
+                cookie: {
+                    domain: "www.maptiler.com"
+                },
+                palette: {
+                    popup: { background: "#EFF3FB", text: "#333359", link: "#3170FE" },
+                    button: { background: "#3170FE" },
+                },
+                theme: "classic",
+                type: "opt-out",
+                revokable: true,
+                content: {
+                    href: "https://www.maptiler.com/privacy-policy/"
+                },
+                law: {
+                    regionalLaw: false,
+                    countryCode: country_code
+                },
+                legal: country_code
+            });
+        })();
+
+
+    </script>
+</body>
+
+</html>
