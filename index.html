@@ -27,7 +27,7 @@
 
         #map {
             position: absolute;
-            top: 0;
+            top: 80px;
             bottom: 0;
             left: 0;
             right: 0;
@@ -41,8 +41,48 @@
 </head>
 
 <body>
+    <header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <a class="" href="/home.html">
+                    <img src="/logo_300.png" height="60" />
+                </a>
+            </div>
+            <div class="search">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Right-aligned menu
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="#">Carta Topografica</a>
+                        <a class="dropdown-item" href="#">Carta OrtoImagem</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="example-date" class="form-label">Date</label>
+                    <input class="form-control" id="example-date" type="date" name="date">
+                </div>
+                <select id="">
+                    <option value="">Select Type</option>
+                    <option value="Carta Topografica">Carta Topografica</option>
+                    <option value="Carta OrtoImagem">Carta OrtoImagem</option>
+                    <!-- Add more options based on your data -->
+                </select>
+                <select id="">
+                    <option value="">Select Type</option>
+                    <option value="Carta Topografica">Carta Topografica</option>
+                    <option value="Carta OrtoImagem">Carta OrtoImagem</option>
+                    <!-- Add more options based on your data -->
+                </select>
+
+            </div>
+            <div class="user">adasda</div>
+        </nav>
+    </header>
     <nav class="map-overlay">
-        <div class="left-side-menu">
+        <div class="">
             <div id="geocoding-control"></div>
             <div>
                 <h3>Selecione o estilo do mapa</h3>
@@ -147,7 +187,6 @@
         </div>
     </div>
 
-
     <script>
         maptilersdk.config.apiKey = 'Cvi2oCtCQVY3qFwOvaT3';
         const map = new maptilersdk.Map({
@@ -155,7 +194,7 @@
             scaleControl: true,
             style: maptilersdk.MapStyle.HYBRID,
             //center: [-47.8849421, -15.7942931], // starting position [lng, lat]
-            //zoom: 15, // starting zoom
+            zoom: 8, // starting zoom
             geolocate: maptilersdk.GeolocationType.POINT
         });
 
@@ -248,6 +287,11 @@
             map.getCanvas().style.cursor = 'pointer';
         });
 
+        map.on('mouseleave', 'cartas_25k_disponiveis', function () {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
         let cart = [];
 
         function addToCart(itemName, itemPrice) {
@@ -270,8 +314,7 @@
                 const li = document.createElement('li');
                 li.innerHTML = `
             <span>${item.name}</span>
-            <span>${item.price}</span>
-        `;
+            <span>${item.price}</span>`;
                 cartItems.appendChild(li);
             });
 

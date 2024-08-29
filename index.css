@@ -1,16 +1,8 @@
-.map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
 .map-overlay {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     position: absolute;
     width: 270px;
-    top: 10px;
+    top: 90px;
     bottom: 10px;
     left: 10px;
     padding: 10px;
@@ -19,6 +11,41 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
+
+.nav-bar {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0056b3;
+    height: 80px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav-bar .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0.5;
+    height: 100vh;
+    background-color: #555;
+}
+
+.nav-bar .search {
+    display: flex;
+    flex: 3;
+    height: 50px;
+    color: #fff;
+    background-color: #182c41;
+}
+
+.nav-bar .user {
+    flex: 2;
+    height: 100vh;
+    background-color: #59697a;
+}
+
 
 .nav {
 
@@ -33,7 +60,7 @@
     border-radius: 8px;
 }
 
-.left-side-menu {
+.side-menu {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
