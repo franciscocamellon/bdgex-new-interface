@@ -3,19 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Detached | Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title>Topbar Only</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-    <!-- App css -->
-    <link href="map.css" rel="stylesheet" type="text/css" />
-    <link href="index.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
-    <link href="assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
 
     <link href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet"
@@ -30,232 +23,65 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.js"></script>
 
 
+    <!-- App css -->
+    <link href="map.css" rel="stylesheet" type="text/css" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+
+
 </head>
 
-<body class="loading" data-layout="detached"
-    data-layout-config='{"layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
-
-    <!-- Topbar Start -->
-    <div class="navbar-custom topnav-navbar topnav-navbar-dark" style="background-color:chartreuse;">
-        <div class="container-fluid">
-
-            <!-- LOGO -->
-            <a href="teste.html" class="topnav-logo" style="background-color: aquamarine;">
-                <span class="topnav-logo-lg">
-                    <img src="logo_300.png" alt="" height="60">
-                </span>
-                <span class="topnav-logo-sm">
-                    <img src="assets/images/logo_sm.png" alt="" height="16">
-                </span>
-            </a>
-
-            <ul class="list-unstyled topbar-right-menu float-left mb-0">
-                <li class="dropdown notification-list" style="background-color: beige;">
-                    <div class="dropdown-item noti-title mt-1">
-                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Right-aligned menu
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="notification-list" style="background-color: rgb(170, 170, 10);">
-                    <div class="dropdown-item noti-title mt-1">
-                        <i class="dripicons-cart noti-icon"></i>
-                        <span>1</span>
-                    </div>
-                </li>
-                <li class="notification-list" style="background-color: rgb(36, 105, 145);">
-                    <div class="form-group">
-                        <label for="example-date">Date</label>
-                        <input class="form-control" id="example-date" type="date" name="date">
-                    </div>
-                </li>
-                <li class="notification-list" style="background-color: rgb(153, 42, 163);">
-                    <div class="form-group">
-                        <label for="example-date">Date</label>
-                        <input class="form-control" id="example-date" type="date" name="date">
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled topbar-right-menu float-right mb-0">
-
-                <li class="notification-list">
-                    <div class="dropdown-item noti-title mt-1">
-                        <div id="geocoding-control"></div>
-                    </div>
-                </li>
-
-                <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#"
-                        id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="dripicons-cart noti-icon"></i>
-                        <span class="noti-icon-badge">1</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg"
-                        aria-labelledby="topbar-notifydrop">
-
-                        <!-- item-->
-                        <div class="dropdown-item noti-title">
-                            <h5 class="m-0">
-                                <span class="float-right">
-                                    <a href="javascript: void(0);" class="text-dark">
-                                        <small>Clear All</small>
-                                    </a>
-                                </span>Notification
-                            </h5>
-                        </div>
-
-                        <div style="max-height: 230px;" data-simplebar>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-primary">
-                                    <i class="mdi mdi-comment-account-outline"></i>
-                                </div>
-                                <p class="notify-details">Caleb Flakelar commented on Admin
-                                    <small class="text-muted">1 min ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-info">
-                                    <i class="mdi mdi-account-plus"></i>
-                                </div>
-                                <p class="notify-details">New user registered.
-                                    <small class="text-muted">5 hours ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon">
-                                    <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle"
-                                        alt="" />
-                                </div>
-                                <p class="notify-details">Cristina Pride</p>
-                                <p class="text-muted mb-0 user-msg">
-                                    <small>Hi, How are you? What about our next meeting</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-primary">
-                                    <i class="mdi mdi-comment-account-outline"></i>
-                                </div>
-                                <p class="notify-details">Caleb Flakelar commented on Admin
-                                    <small class="text-muted">4 days ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon">
-                                    <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle"
-                                        alt="" />
-                                </div>
-                                <p class="notify-details">Karen Robinson</p>
-                                <p class="text-muted mb-0 user-msg">
-                                    <small>Wow ! this admin looks good and awesome design</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-info">
-                                    <i class="mdi mdi-heart"></i>
-                                </div>
-                                <p class="notify-details">Carlos Crouch liked
-                                    <b>Admin</b>
-                                    <small class="text-muted">13 days ago</small>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="notification-list">
-                    <a class="nav-link right-bar-toggle" href="javascript: void(0);">
-                        <i class="dripicons-gear noti-icon"></i>
-                    </a>
-                </li>
-                <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
-                        id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="account-user-avatar">
-                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                        </span>
-                        <span>
-                            <span class="account-user-name">Dominic Keller</span>
-                            <span class="account-position">Founder</span>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
-                        aria-labelledby="topbar-userdrop">
-                        <!-- item-->
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
-                        </div>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-account-circle mr-1"></i>
-                            <span>My Account</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-account-edit mr-1"></i>
-                            <span>Settings</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-lifebuoy mr-1"></i>
-                            <span>Support</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-lock-outline mr-1"></i>
-                            <span>Lock Screen</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-logout mr-1"></i>
-                            <span>Logout</span>
-                        </a>
-
-                    </div>
-                </li>
-            </ul>
-            <a class="button-menu-mobile disable-btn">
-                <div class="lines">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </a>
-
-        </div>
-    </div>
-    <!-- end Topbar -->
-
-    <!-- Start Content-->
-
+<body class="loading" data-layout="topnav"
+    data-layout-config='{"layoutBoxed":false,"darkMode":false,"showRightSidebarOnStart": true}'>
 
     <!-- Begin page -->
     <div class="wrapper">
         <div class="content-page">
+
+            <!-- Topbar Start -->
+            <div class="navbar-custom topnav-navbar topnav-navbar-dark">
+                <div class="container-fluid">
+
+                    <!-- LOGO -->
+                    <a href="" class="topnav-logo">
+                        <span class="topnav-logo-lg">
+                            <img src="assets/images/logo-light.png" alt="" height="16">
+                        </span>
+                        <span class="topnav-logo-sm">
+                            <img src="assets/images/logo_sm_dark.png" alt="" height="16">
+                        </span>
+                    </a>
+
+                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
+                                id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="account-user-avatar">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                </span>
+                                <span>
+                                    <span class="account-user-name">Dominic Keller</span>
+                                    <span class="account-position">Founder</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <a class="navbar-toggle" data-toggle="collapse" data-target="#topnav-menu-content">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- end Topbar -->
             <nav class="map-overlay">
                 <div class="">
-                    <!-- <div id="geocoding-control"></div> -->
+                    <div id="geocoding-control"></div>
                     <div>
                         <h3>Selecione o estilo do mapa</h3>
                         <select name="mapstyles" id="mapstyles" class="form-select mapstyles-select"
@@ -358,38 +184,14 @@
                     <button id="checkout-button" class="checkout-button">Download</button>
                 </div>
             </div>
-            <div class="content">
+        </div>
 
+    </div>
+    <!-- END wrapper -->
 
-            </div> <!-- End Content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-right footer-links d-none d-md-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
-
-        </div> <!-- content-page -->
-
-    </div> <!-- end wrapper-->
-
-    <!-- END Container -->
-
-
-
+    <!-- Right Sidebar -->
+    <div class="rightbar-overlay"></div>
+    <!-- /Right-bar -->
     <script>
         maptilersdk.config.apiKey = 'Cvi2oCtCQVY3qFwOvaT3';
         const map = new maptilersdk.Map({
@@ -615,7 +417,6 @@
     <!-- bundle -->
     <script src="assets/js/vendor.min.js"></script>
     <script src="assets/js/app.min.js"></script>
-    <!-- end demo js-->
 
 </body>
 
