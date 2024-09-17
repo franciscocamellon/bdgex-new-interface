@@ -36,11 +36,11 @@
     data-layout-config='{"layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
 
     <!-- Topbar Start -->
-    <div class="navbar-custom topnav-navbar topnav-navbar-dark" style="background-color:chartreuse;">
+    <div class="navbar-custom topnav-navbar topnav-navbar-dark">
         <div class="container-fluid">
 
             <!-- LOGO -->
-            <a href="teste.html" class="topnav-logo" style="background-color: aquamarine;">
+            <a href="teste.html" class="topnav-logo">
                 <span class="topnav-logo-lg">
                     <img src="logo_300.png" alt="" height="60">
                 </span>
@@ -50,35 +50,49 @@
             </a>
 
             <ul class="list-unstyled topbar-right-menu float-left mb-0">
-                <li class="dropdown notification-list" style="background-color: beige;">
-                    <div class="dropdown-item noti-title mt-1">
+                <li class="dropdown notification-list">
+                    <div class="dropdown-item noti-title mt-0">
                         <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            Right-aligned menu
+                            Escolha o tipo de produto
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Carta Topográfica</a>
+                            <a class="dropdown-item" href="#">Carta Ortoimagem</a>
+                            <a class="dropdown-item" href="#">Vetor</a>
                         </div>
                     </div>
                 </li>
-                <li class="notification-list" style="background-color: rgb(170, 170, 10);">
-                    <div class="dropdown-item noti-title mt-1">
-                        <i class="dripicons-cart noti-icon"></i>
-                        <span>1</span>
+                <li class="notification-list">
+                    <div class="dropdown-item noti-title mt-0">
+                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Escolha o produtor
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Diretoria do Serviço Geográfico</a>
+                            <a class="dropdown-item" href="#">1° Centro de Geoinformação</a>
+                            <a class="dropdown-item" href="#">2° Centro de Geoinformação</a>
+                            <a class="dropdown-item" href="#">3° Centro de Geoinformação</a>
+                            <a class="dropdown-item" href="#">4° Centro de Geoinformação</a>
+                            <a class="dropdown-item" href="#">5° Centro de Geoinformação</a>
+                            <a class="dropdown-item" href="#">IBGE</a>
+                        </div>
                     </div>
                 </li>
-                <li class="notification-list" style="background-color: rgb(36, 105, 145);">
-                    <div class="form-group">
-                        <label for="example-date">Date</label>
+                <li class="notification-list">
+                    <div class="dropdown-item noti-title mt-0">
                         <input class="form-control" id="example-date" type="date" name="date">
                     </div>
                 </li>
-                <li class="notification-list" style="background-color: rgb(153, 42, 163);">
-                    <div class="form-group">
-                        <label for="example-date">Date</label>
+                <li class="notification-list">
+                    <div class="dropdown-item noti-title mt-0">
                         <input class="form-control" id="example-date" type="date" name="date">
+                    </div>
+                </li>
+                <li class="notification-list">
+                    <div class="dropdown-item noti-title mt-0">
+                        <button type="button" class="btn btn-primary">Filtrar</button>
                     </div>
                 </li>
             </ul>
@@ -95,7 +109,7 @@
                     <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#"
                         id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="dripicons-cart noti-icon"></i>
-                        <span class="noti-icon-badge">1</span>
+                        <span id="total-price" class="noti-icon-badge"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg"
                         aria-labelledby="topbar-notifydrop">
@@ -104,7 +118,7 @@
                         <div class="dropdown-item noti-title">
                             <h5 class="m-0">
                                 <span class="float-right">
-                                    <a href="javascript: void(0);" class="text-dark">
+                                    <a href="#" class="text-dark">
                                         <small>Clear All</small>
                                     </a>
                                 </span>Notification
@@ -112,70 +126,13 @@
                         </div>
 
                         <div style="max-height: 230px;" data-simplebar>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-primary">
-                                    <i class="mdi mdi-comment-account-outline"></i>
-                                </div>
-                                <p class="notify-details">Caleb Flakelar commented on Admin
-                                    <small class="text-muted">1 min ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-info">
-                                    <i class="mdi mdi-account-plus"></i>
-                                </div>
-                                <p class="notify-details">New user registered.
-                                    <small class="text-muted">5 hours ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon">
-                                    <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle"
-                                        alt="" />
-                                </div>
-                                <p class="notify-details">Cristina Pride</p>
-                                <p class="text-muted mb-0 user-msg">
-                                    <small>Hi, How are you? What about our next meeting</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-primary">
-                                    <i class="mdi mdi-comment-account-outline"></i>
-                                </div>
-                                <p class="notify-details">Caleb Flakelar commented on Admin
-                                    <small class="text-muted">4 days ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon">
-                                    <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle"
-                                        alt="" />
-                                </div>
-                                <p class="notify-details">Karen Robinson</p>
-                                <p class="text-muted mb-0 user-msg">
-                                    <small>Wow ! this admin looks good and awesome design</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-info">
-                                    <i class="mdi mdi-heart"></i>
-                                </div>
-                                <p class="notify-details">Carlos Crouch liked
-                                    <b>Admin</b>
-                                    <small class="text-muted">13 days ago</small>
-                                </p>
-                            </a>
+                            <ul id="cart-items" class="cart-items">
+                                <!-- Items will be dynamically added here -->
+                            </ul>
+                            <div class="cart-footer">
+                                <span id="total-price" class="total-price">0</span>
+                                <button id="checkout-button" class="checkout-button">Download</button>
+                            </div>
                         </div>
                     </div>
                 </li>
@@ -348,16 +305,6 @@
             </nav>
             <div id="map" class="map"></div>
 
-            <div id="floating-cart" class="floating-cart">
-                <h4>Your Cart</h4>
-                <ul id="cart-items" class="cart-items">
-                    <!-- Items will be dynamically added here -->
-                </ul>
-                <div class="cart-footer">
-                    <span id="total-price" class="total-price">0</span>
-                    <button id="checkout-button" class="checkout-button">Download</button>
-                </div>
-            </div>
             <div class="content">
 
 
@@ -395,7 +342,7 @@
         const map = new maptilersdk.Map({
             container: 'map', // container id
             scaleControl: true,
-            style: maptilersdk.MapStyle.HYBRID,
+            style: maptilersdk.MapStyle.VOYAGER,
             //center: [-47.8849421, -15.7942931], // starting position [lng, lat]
             zoom: 8, // starting zoom
             geolocate: maptilersdk.GeolocationType.POINT
@@ -545,7 +492,7 @@
                 'layout': {},
                 'paint': {
                     'fill-color': 'rgb(255, 255, 255)',
-                    'fill-opacity': 0.3,
+                    'fill-opacity': 1,
                     'fill-outline-color': 'rgb(0, 0, 0)'
                 }
             });
