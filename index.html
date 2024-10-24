@@ -1,569 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto Interdisciplinar</title>
 
-<head>
-    <meta charset="utf-8" />
-    <title>Detached | Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- App css -->
-    <link href="map.css" rel="stylesheet" type="text/css" />
-    <link href="index.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
-    <link href="assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-
-    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet"
-        type="text/css" />
-    <link href="https://cdn.maptiler.com/maptiler-geocoding-control/v1.3.2/style.css" rel="stylesheet">
-    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.css" rel="stylesheet"
-        type="text/css" />
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <!-- MapTiler -->
+    <!-- esta parte é necessária para a configuração do MapTiler na página -->
+    <link
+      href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.maptiler.com/maptiler-geocoding-control/v1.3.2/style.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
     <script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
     <script src="https://cdn.maptiler.com/maptiler-geocoding-control/v1.3.2/maptilersdk.umd.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.js"></script>
+    <!-- MapTiler -->
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <img src="assets\images\logo_300.png" class="logo" />
 
+        <div class="menu">
+          <div class="icons">
+            <span id="cart-icon" class="material-symbols-outlined icon-md-30"
+              >shopping_cart <span id="badge" class="badge"> 0 </span></span
+            >
+          </div>
 
-</head>
+          <div class="user">
+            <img src="https://avatar.iran.liara.run/public" />
 
-<body class="loading" data-layout="detached"
-    data-layout-config='{"layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
-
-    <!-- Topbar Start -->
-    <div class="navbar-custom topnav-navbar topnav-navbar-dark">
-        <div class="container-fluid">
-
-            <!-- LOGO -->
-            <a href="teste.html" class="topnav-logo">
-                <span class="topnav-logo-lg">
-                    <img src="logo_300.png" alt="" height="60">
-                </span>
-                <span class="topnav-logo-sm">
-                    <img src="assets/images/logo_sm.png" alt="" height="16">
-                </span>
-            </a>
-
-            <ul class="list-unstyled topbar-right-menu float-left mb-0">
-                <li class="dropdown notification-list">
-                    <div class="dropdown-item noti-title mt-0">
-                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Escolha o tipo de produto
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Carta Topográfica</a>
-                            <a class="dropdown-item" href="#">Carta Ortoimagem</a>
-                            <a class="dropdown-item" href="#">Vetor</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="notification-list">
-                    <div class="dropdown-item noti-title mt-0">
-                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Escolha o produtor
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Diretoria do Serviço Geográfico</a>
-                            <a class="dropdown-item" href="#">1° Centro de Geoinformação</a>
-                            <a class="dropdown-item" href="#">2° Centro de Geoinformação</a>
-                            <a class="dropdown-item" href="#">3° Centro de Geoinformação</a>
-                            <a class="dropdown-item" href="#">4° Centro de Geoinformação</a>
-                            <a class="dropdown-item" href="#">5° Centro de Geoinformação</a>
-                            <a class="dropdown-item" href="#">IBGE</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="notification-list">
-                    <div class="dropdown-item noti-title mt-0">
-                        <input class="form-control" id="example-date" type="date" name="date">
-                    </div>
-                </li>
-                <li class="notification-list">
-                    <div class="dropdown-item noti-title mt-0">
-                        <input class="form-control" id="example-date" type="date" name="date">
-                    </div>
-                </li>
-                <li class="notification-list">
-                    <div class="dropdown-item noti-title mt-0">
-                        <button type="button" class="btn btn-primary">Filtrar</button>
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled topbar-right-menu float-right mb-0">
-
-                <li class="notification-list">
-                    <div class="dropdown-item noti-title mt-1">
-                        <div id="geocoding-control"></div>
-                    </div>
-                </li>
-
-                <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#"
-                        id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="dripicons-cart noti-icon"></i>
-                        <span id="total-price" class="noti-icon-badge"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg"
-                        aria-labelledby="topbar-notifydrop">
-
-                        <!-- item-->
-                        <div class="dropdown-item noti-title">
-                            <h5 class="m-0">
-                                <span class="float-right">
-                                    <a href="#" class="text-dark">
-                                        <small>Clear All</small>
-                                    </a>
-                                </span>Notification
-                            </h5>
-                        </div>
-
-                        <div style="max-height: 230px;" data-simplebar>
-                            <ul id="cart-items" class="cart-items">
-                                <!-- Items will be dynamically added here -->
-                            </ul>
-                            <div class="cart-footer">
-                                <span id="total-price" class="total-price">0</span>
-                                <button id="checkout-button" class="checkout-button">Download</button>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="notification-list">
-                    <a class="nav-link right-bar-toggle" href="javascript: void(0);">
-                        <i class="dripicons-gear noti-icon"></i>
-                    </a>
-                </li>
-                <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
-                        id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="account-user-avatar">
-                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                        </span>
-                        <span>
-                            <span class="account-user-name">Dominic Keller</span>
-                            <span class="account-position">Founder</span>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
-                        aria-labelledby="topbar-userdrop">
-                        <!-- item-->
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
-                        </div>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-account-circle mr-1"></i>
-                            <span>My Account</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-account-edit mr-1"></i>
-                            <span>Settings</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-lifebuoy mr-1"></i>
-                            <span>Support</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-lock-outline mr-1"></i>
-                            <span>Lock Screen</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-logout mr-1"></i>
-                            <span>Logout</span>
-                        </a>
-
-                    </div>
-                </li>
-            </ul>
-            <a class="button-menu-mobile disable-btn">
-                <div class="lines">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </a>
-
+            <div>
+              <p>3 Sgt Topo</p>
+              <p>Operador</p>
+            </div>
+          </div>
         </div>
-    </div>
-    <!-- end Topbar -->
+        <!--  -->
+      </nav>
+      <!-- shopping-cart -->
+      <div id="shopping-cart" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Lista de produtos</h4>
+              <span id="btn-close" class="material-symbols-outlined btn-icon">
+                close
+              </span>
+            </div>
+            <div class="modal-body">
+              <table class="content-table">
+                <thead>
+                  <tr>
+                    <th colspan="2">Produto</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th style="width: 50px"></th>
+                  </tr>
+                </thead>
+                <!-- os dados dinamicos do carrinho entram aqui -->
+                <tbody id="cart-items"></tbody>
+                <!-- dados dinamicos -->
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary">Download</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- shopping-cart -->
+    </header>
 
-    <!-- Start Content-->
+    <main>
+      <section>
+        <div class="tools">
+          <span id="layer-icon" class="material-symbols-outlined icon-md-18"
+            >stacks</span
+          >
+          <span id="filter-icon" class="material-symbols-outlined icon-md-18"
+            >filter_alt</span
+          >
+        </div>
+        <!-- camadas -->
+        <div id="layer-container" class="layer-container">
+          <div class="layers">
+            <h3>Camadas auxiliares:</h3>
 
+            <div class="layer-check">
+              <input type="checkbox" id="toggle-country" checked />
+              <label for="country">País</label>
+            </div>
 
-    <!-- Begin page -->
-    <div class="wrapper">
-        <div class="content-page">
-            <nav class="map-overlay">
-                <div class="">
-                    <!-- <div id="geocoding-control"></div> -->
-                    <div>
-                        <h3>Selecione o estilo do mapa</h3>
-                        <select name="mapstyles" id="mapstyles" class="form-select mapstyles-select"
-                            style="background-color: rgba(244, 244, 244, 0.8);">
-                            <optgroup label="Navigation and city exploration">
-                                <option value="STREETS">STREETS</option>
-                                <option value="STREETS.DARK">STREETS.DARK</option>
-                                <option value="STREETS.LIGHT">STREETS.LIGHT</option>
-                                <option value="STREETS.PASTEL">STREETS.PASTEL</option>
-                            </optgroup>
-                            <option value="OUTDOOR">OUTDOOR</option>
-                            <option value="WINTER">WINTER</option>
-                            <option value="SATELLITE">SATELLITE</option>
-                            <option value="HYBRID" selected>HYBRID</option>
-                            <optgroup label="Data visualization">
-                                <option value="DATAVIZ">DATAVIZ</option>
-                                <option value="DATAVIZ.DARK">DATAVIZ.DARK</option>
-                                <option value="DATAVIZ.LIGHT">DATAVIZ.LIGHT</option>
-                            </optgroup>
-                            <optgroup label="Minimalist and general purpose">
-                                <option value="BASIC">BASIC</option>
-                                <option value="BASIC.DARK">BASIC.DARK</option>
-                                <option value="BASIC.LIGHT">BASIC.LIGHT</option>
-                            </optgroup>
-                            <optgroup label="High contrast navigation">
-                                <option value="BRIGHT">BRIGHT</option>
-                                <option value="BRIGHT.DARK">BRIGHT.DARK</option>
-                                <option value="BRIGHT.LIGHT">BRIGHT.LIGHT</option>
-                                <option value="BRIGHT.PASTEL">BRIGHT.PASTEL</option>
-                            </optgroup>
-                            <optgroup label="Topographic study">
-                                <option value="TOPO">TOPO</option>
-                                <option value="TOPO.SHINY">TOPO.SHINY</option>
-                                <option value="TOPO.PASTEL">TOPO.PASTEL</option>
-                                <option value="TOPO.TOPOGRAPHIQUE">TOPO.TOPOGRAPHIQUE</option>
-                            </optgroup>
-                            <optgroup label="Minimalist">
-                                <option value="VOYAGER">VOYAGER</option>
-                                <option value="VOYAGER.DARK">VOYAGER.DARK</option>
-                                <option value="VOYAGER.LIGHT">VOYAGER.LIGHT</option>
-                                <option value="VOYAGER.VINTAGE">VOYAGER.VINTAGE</option>
-                            </optgroup>
-                            <optgroup label="High contrast">
-                                <option value="TONER">TONER</option>
-                                <option value="TONER.BACKGROUND">TONER.BACKGROUND</option>
-                                <option value="TONER.LITE">TONER.LITE</option>
-                                <option value="TONER.LINES">TONER.LINES</option>
-                            </optgroup>
-                            <optgroup label="Neutral greyscale style with hillshading">
-                                <option value="BACKDROP">BACKDROP</option>
-                                <option value="BACKDROP.DARK">BACKDROP.DARK</option>
-                                <option value="BACKDROP.LIGHT">BACKDROP.LIGHT</option>
-                            </optgroup>
-                            <option value="OPENSTREETMAP">OPENSTREETMAP</option>
-                        </select>
-                    </div>
+            <div class="layer-check">
+              <input type="checkbox" id="states" />
+              <label for="states">Estados</label>
+            </div>
 
-                    <div id="nav-filter">
-                        <!-- Filter controls -->
-                        <h3>Filter by:</h3>
-                        <select id="yearFilter">
-                            <option value="">Select Year</option>
-                            <option value="70">1970</option>
-                            <option value="82">1982</option>
-                            <!-- Add more options as needed -->
-                        </select>
+            <div class="layer-check">
+              <input type="checkbox" id="cities" />
+              <label for="cities">Municípios</label>
+            </div>
+          </div>
+        </div>
+        <!-- camadas -->
+        <!-- filtro -->
+        <div id="filter-container" class="filter-container">
+          <div class="filter">
+            <h3>Opções de filtro:</h3>
 
-                        <select id="typeFilter">
-                            <option value="">Select Type</option>
-                            <option value="Carta Topografica">Carta Topografica</option>
-                            <!-- Add more options based on your data -->
-                        </select>
+            <div class="filter-select">
+              <label>Ano:</label>
+              <select id="yearFilter">
+                <option value="">Selecione um ano</option>
+                <option value="70">1970</option>
+                <option value="78">1978</option>
+                <option value="79">1979</option>
+                <option value="82">1982</option>
+                <option value="88">1988</option>
+                <option value="95">1995</option>
+                <option value="96">1996</option>
+                <option value="97">1997</option>
+                <option value="20">2020</option>
+              </select>
+            </div>
 
-                        <select id="ownerFilter">
-                            <option value="">Select Owner</option>
-                            <option value="Diretoria de Serviço Geográfico">Diretoria de Serviço Geográfico</option>
-                            <!-- Add more options based on your data -->
-                        </select>
+            <div class="filter-select">
+              <label class="filter-label" for="typeFilter"
+                >Tipo de produto:</label
+              >
+              <select id="typeFilter">
+                <option value="">Selecione um tipo</option>
+                <option value="Carta Topografica">
+                  Carta Topográfica Matricial
+                </option>
+                <option value="Carta Ortoimagem">Carta Ortoimagem</option>
+                <option value="Conjunto de Dados Geoespaciais Vetoriais">
+                  Conjunto de Dados Geoespaciais Vetoriais
+                </option>
+              </select>
+            </div>
 
-                        <select id="scaleFilter">
-                            <option value="">Select Scale</option>
-                            <option value="25000">25000</option>
-                            <!-- Add more options based on your data -->
-                        </select>
+            <div class="filter-select">
+              <label class="filter-label" for="ownerFilter">Produtor:</label>
+              <select id="ownerFilter">
+                <option value="">Selecione um produtor</option>
+                <option value="Diretoria de Serviço Geográfico">
+                  Diretoria de Serviço Geográfico
+                </option>
+                <option value="1º Centro de Geoinformação">
+                  1° Centro de Geoinformação
+                </option>
+                <option value="2º Centro de Geoinformação">
+                  2° Centro de Geoinformação
+                </option>
+                <option value="3º Centro de Geoinformação">
+                  3° Centro de Geoinformação
+                </option>
+                <option value="4º Centro de Geoinformação">
+                  4° Centro de Geoinformação
+                </option>
+                <option value="5º Centro de Geoinformação">
+                  5° Centro de Geoinformação
+                </option>
+                <option value="Instituto Brasileiro de Geografia e Estatística">
+                  IBGE
+                </option>
+                <option value="Superintendência de Desenvolvimento do Nordeste">
+                  SUDENE
+                </option>
+              </select>
+            </div>
 
-                    </div>
-                    <pre id="info" class="info"></pre>
-                </div>
+            <div class="filter-select">
+              <label class="filter-label" for="scaleFilter">Escala:</label>
+              <select id="scaleFilter">
+                <option value="">Selecione uma escala</option>
+                <option value="25000">25000</option>
+                <option value="50000">50000</option>
+                <option value="100000">100000</option>
+                <option value="250000">250000</option>
+              </select>
+            </div>
 
-            </nav>
-            <div id="map" class="map"></div>
+            <div>
+              <button id="reset-button" class="btn btn-primary" type="button">
+                Limpar filtros
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- filtro -->
+        <!-- geocoding -->
+        <div id="geocoding-control" class="geocoding-control"></div>
+        <!-- geocoding -->
+        <!-- latlong -->
+        <div id="latlong-info" class="latlong-info">
+          <h5></h5>
+        </div>
+        <!-- latlong -->
+      </section>
 
-            <div class="content">
-
-
-            </div> <!-- End Content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-right footer-links d-none d-md-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
-
-        </div> <!-- content-page -->
-
-    </div> <!-- end wrapper-->
-
-    <!-- END Container -->
-
-
+      <section>
+        <div id="map" class="map"></div>
+      </section>
+    </main>
 
     <script>
-        maptilersdk.config.apiKey = 'Cvi2oCtCQVY3qFwOvaT3';
-        const map = new maptilersdk.Map({
-            container: 'map', // container id
-            scaleControl: true,
-            style: maptilersdk.MapStyle.VOYAGER,
-            //center: [-47.8849421, -15.7942931], // starting position [lng, lat]
-            zoom: 8, // starting zoom
-            geolocate: maptilersdk.GeolocationType.POINT
-        });
+      // Inicializa um array vazio para armazenar os itens do carrinho
+      let cart = [];
 
-        document.getElementById('mapstyles').addEventListener('change', (e) => {
-            const style_code = e.target.value.split(".");
-            style_code.length === 2 ? map.setStyle(maptilersdk.MapStyle[style_code[0]][style_code[1]]) : map.setStyle(maptilersdk.MapStyle[style_code[0]]);
-        });
+      // Função para adicionar itens ao carrinho
+      function addToCart(itemName, itemType) {
+        // Adiciona um novo item ao carrinho com o nome, tipo e quantidade inicial de 1
+        cart.push({ name: itemName, type: itemType, qtd: 1 });
 
-        // Function to apply the filter
-        function applyFilter() {
-            const typeFilter = document.getElementById('typeFilter').value;
-            const ownerFilter = document.getElementById('ownerFilter').value;
-            const scaleFilter = document.getElementById('scaleFilter').value;
-            const yearFilter = document.getElementById('yearFilter').value;
-
-
-            let filter = ['all'];
-
-            if (typeFilter) {
-                filter.push(['==', 'type', typeFilter]);
-            }
-            if (ownerFilter) {
-                filter.push(['==', 'owner', ownerFilter]);
-            }
-            if (scaleFilter) {
-                filter.push(['==', 'scale', parseInt(scaleFilter)]);
-            }
-            if (yearFilter) {
-                filter.push(['==', 'year', yearFilter]);
-            }
-
-            map.setFilter('cartas_25k_disponiveis', filter);
+        // Se houver mais de um item no carrinho, atualiza o badge (ícone de notificação do carrinho)
+        if (cart.length > 0) {
+          const badge = document.getElementById("badge");
+          // Mostra o badge, que estava oculto
+          badge.style.display = "inline-block";
+          // Atualiza o número de itens no badge para o tamanho atual do carrinho
+          badge.textContent = cart.length;
         }
 
-        // Event listeners for the filter controls
-        document.getElementById('typeFilter').addEventListener('change', applyFilter);
-        document.getElementById('ownerFilter').addEventListener('change', applyFilter);
-        document.getElementById('scaleFilter').addEventListener('change', applyFilter);
-        document.getElementById('yearFilter').addEventListener('change', applyFilter);
+        // Chama a função updateCart para renderizar o carrinho na interface
+        updateCart();
+      }
 
+      // Função para atualizar a interface com os itens do carrinho
+      function updateCart() {
+        // Seleciona o elemento da tabela onde os itens do carrinho serão exibidos
+        const cartItems = document.getElementById("cart-items");
 
+        // Limpa o conteúdo atual do carrinho para evitar duplicações
+        cartItems.innerHTML = "";
 
-        map.on('click', 'cartas_25k_disponiveis', function (e) {
+        // Itera sobre cada item do carrinho
+        cart.forEach((item) => {
+          // Cria uma nova linha da tabela (tr) para cada item
+          const cart_tr = document.createElement("tr");
 
-            const itemName = `${e.features[0].properties.name} - ${e.features[0].properties.mi}`;
-            const itemPrice = 1;
+          // Define o conteúdo HTML da nova linha do carrinho, com detalhes do item
+          // cada linha é um produto(carta)
+          cart_tr.innerHTML = `
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <span>${item.name}</span>
+            </td>
+            <td>
+              <span>${item.type}</span>
+            </td>
+            <td>
+              <input type="number" value="${item.qtd}" /> 
+            </td>
+            <td>
+              <span class="material-symbols-outlined icon-md-18">delete</span>
+            </td>`;
 
-            // Display the popup as before
-            new maptilersdk.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(
-
-                    `<div class="popup-container">
-                        <div class="popup-title">
-                            <h3>${e.features[0].properties.name}</h3>
-                            <h4>${e.features[0].properties.mi}</h4>
-                        <div/>
-                        
-                        <ul class="list-style-none popup-list">
-                            <li>
-                                <span class="legend-popup">Inom: ${e.features[0].properties.inom}</span>
-                            </li>
-                            <li>
-                                <span class="legend-popup">Produtor: ${e.features[0].properties.owner}</span>
-                            </li>
-                            <li>
-                                <span class="legend-popup">Tipo: ${e.features[0].properties.type}</span>
-                            </li>
-                            <li>
-                                <span class="legend-popup">Escala: ${e.features[0].properties.scale}</span>
-                            </li>
-                            <li>
-                                <span class="legend-popup">Data: ${e.features[0].properties.conclusion_date}</span>
-                            </li>
-                            </li>
-                            <li>
-                                <span class="legend-popup">Ano: ${e.features[0].properties.year}</span>
-                            </li>
-                        </ul>
-                        <div class="popup-footer">
-                            <button class="add-to-cart-button" onclick="addToCart('${itemName}', ${itemPrice})">Add to Cart</button>
-                        </div>
-                    </div>`
-
-                )
-                .addTo(map);
+          // Adiciona a nova linha à tabela de itens do carrinho
+          cartItems.appendChild(cart_tr);
         });
-
-        map.on('mouseenter', 'cartas_25k_disponiveis', function () {
-            map.getCanvas().style.cursor = 'pointer';
-        });
-
-        map.on('mouseleave', 'cartas_25k_disponiveis', function () {
-            map.getCanvas().style.cursor = '';
-            popup.remove();
-        });
-
-        let cart = [];
-
-        function addToCart(itemName, itemPrice) {
-            // Add item to the cart array
-            cart.push({ name: itemName, price: itemPrice });
-            updateCart();
-        }
-
-        function updateCart() {
-            const cartItems = document.getElementById('cart-items');
-            const totalPriceElement = document.getElementById('total-price');
-            cartItems.innerHTML = ''; // Clear the current cart items
-
-            let totalPrice = 0;
-
-            cart.forEach((item) => {
-                totalPrice += item.price;
-
-                // Create the list item for the cart
-                const li = document.createElement('li');
-                li.innerHTML = `
-            <span>${item.name}</span>
-            <span>${item.price}</span>`;
-                cartItems.appendChild(li);
-            });
-
-            // Update total price
-            totalPriceElement.textContent = `${totalPrice}`;
-        }
-
-
-        map.on('load', async function () {
-            const geojson = await maptilersdk.data.get('7188b22e-5d18-4516-8799-c3d6611bec43');
-
-            geojson.features.forEach(feature => {
-                const dateParts = feature.properties.conclusion_date.split('/');
-                feature.properties.year = dateParts[2]; // Assuming the date is in the format DD/MM/YY
-            });
-
-            map.addSource('molduras_25k', {
-                'type': 'geojson',
-                'data': geojson
-            });
-            map.addLayer({
-                'id': 'cartas_25k_disponiveis',
-                'type': 'fill',
-                'source': 'molduras_25k',
-                'layout': {},
-                'paint': {
-                    'fill-color': 'rgb(255, 255, 255)',
-                    'fill-opacity': 1,
-                    'fill-outline-color': 'rgb(0, 0, 0)'
-                }
-            });
-        });
-
-        map.on('mousemove', function (e) {
-            const lngLat = e.lngLat.wrap();
-            const formattedLngLat = `${lngLat.lng.toFixed(4)}, ${lngLat.lat.toFixed(4)}`;
-            document.getElementById('info').innerHTML = formattedLngLat;
-        });
-
-        const gc = new maptilersdkMaptilerGeocoder.GeocodingControl({});
-        document.getElementById('geocoding-control').appendChild(gc.onAdd(map));
-
-        var draw = new MapboxDraw({
-            displayControlsDefault: false,
-            controls: {
-                polygon: true,
-                trash: true
-            }
-        });
-
-        //map.addControl(gc, 'top-left');
-        map.addControl(draw);
-
-        //fix conytrols style
-        const drawControls = document.querySelectorAll(".mapboxgl-ctrl-group.mapboxgl-ctrl");
-        drawControls.forEach((elem) => {
-            elem.classList.add('maplibregl-ctrl', 'maplibregl-ctrl-group');
-        });
-
-        map.on('draw.create', updateArea);
-        map.on('draw.delete', updateArea);
-        map.on('draw.update', updateArea);
-
-
-
-
-        (async () => {
-            const result = await maptilersdk.geolocation.info();
-            let { country_code } = result;
-            country_code = 'ES';
-            window.cookieconsent.initialise({
-                cookie: {
-                    domain: "www.maptiler.com"
-                },
-                palette: {
-                    popup: { background: "#EFF3FB", text: "#333359", link: "#3170FE" },
-                    button: { background: "#3170FE" },
-                },
-                theme: "classic",
-                type: "opt-out",
-                revokable: true,
-                content: {
-                    href: "https://www.maptiler.com/privacy-policy/"
-                },
-                law: {
-                    regionalLaw: false,
-                    countryCode: country_code
-                },
-                legal: country_code
-            });
-        })();
-
-
+      }
     </script>
-    <!-- bundle -->
-    <script src="assets/js/vendor.min.js"></script>
-    <script src="assets/js/app.min.js"></script>
-    <!-- end demo js-->
-
-</body>
-
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
