@@ -148,6 +148,26 @@ document.addEventListener("DOMContentLoaded", function createMap() {
       .addTo(map);
   });
 
+  // Cria uma instância do MapboxDraw para permitir o desenho de polígonos e a exclusão deles
+  // exemplo https://docs.maptiler.com/sdk-js/examples/mapbox-gl-draw/
+  var draw = new MapboxDraw({
+    displayControlsDefault: false, // Não exibe os controles padrão do MapboxDraw
+    controls: {
+      polygon: true, // Habilita a ferramenta de desenho de polígonos
+      trash: true, // Habilita a ferramenta para deletar feições desenhadas
+    },
+  });
+  // adiciona a ferramenta de desenho ao mapa
+  map.addControl(draw);
+
+  // Corrige o estilo dos controles de desenho adicionando classes do MapLibre
+  const drawControls = document.querySelectorAll(
+    ".mapboxgl-ctrl-group.mapboxgl-ctrl"
+  );
+  drawControls.forEach((elem) => {
+    elem.classList.add("maplibregl-ctrl", "maplibregl-ctrl-group");
+  });
+
   // Altera o cursor ao passar o mouse sobre as feições
   map.on("mouseenter", "cartas_25k_disponiveis", function () {
     map.getCanvas().style.cursor = "pointer";
@@ -240,23 +260,124 @@ document.addEventListener("DOMContentLoaded", function createMap() {
   const gc = new maptilersdkMaptilerGeocoder.GeocodingControl({});
   document.getElementById("geocoding-control").appendChild(gc.onAdd(map));
 
-  // Cria uma instância do MapboxDraw para permitir o desenho de polígonos e a exclusão deles
-  // exemplo https://docs.maptiler.com/sdk-js/examples/mapbox-gl-draw/
-  var draw = new MapboxDraw({
-    displayControlsDefault: false, // Não exibe os controles padrão do MapboxDraw
-    controls: {
-      polygon: true, // Habilita a ferramenta de desenho de polígonos
-      trash: true, // Habilita a ferramenta para deletar feições desenhadas
-    },
-  });
-  // adiciona a ferramenta de desenho ao mapa
-  map.addControl(draw);
+  let isDrawing = false;
+  // Cria um array para armazenar os polígonos que vão ser destacados
+  const highlightedFeatures = [];
 
-  // Corrige o estilo dos controles de desenho adicionando classes do MapLibre
-  const drawControls = document.querySelectorAll(
-    ".mapboxgl-ctrl-group.mapboxgl-ctrl"
-  );
-  drawControls.forEach((elem) => {
-    elem.classList.add("maplibregl-ctrl", "maplibregl-ctrl-group");
+  map.on('draw.create', (e) => {
+
+    isDrawing = true;
+
+    const drawnPolygon = e.features[0];
+
+    const geojsonData = map.getSource('molduras_25k')._data;
+
+    geojsonData.features.forEach((feature) => {
+        const intersection = turf.intersect(drawnPolygon, feature);
+
+        if (intersection) {
+            console.log('Interseção encontrada!', feature);
+
+            // Adiciona cada polígono que intersecta ao array
+            highlightedFeatures.push(feature);
+        }
+    });
+
+    // Adiciona ou atualiza a camada para todos os polígonos destacados
+    if (highlightedFeatures.length > 0) {
+        if (map.getSource('highlighted-polygons')) {
+            // Atualiza a fonte com os dados dos polígonos destacados
+            map.getSource('highlighted-polygons').setData({
+                type: 'FeatureCollection',
+                features: highlightedFeatures
+            });
+        } else {
+            // Adiciona a fonte se não existir
+            map.addSource('highlighted-polygons', {
+                type: 'geojson',
+                data: {
+                    type: 'FeatureCollection',
+                    features: highlightedFeatures
+                }
+            });
+
+            // Adiciona a camada para os polígonos destacados
+            map.addLayer({
+                id: 'highlighted-polygons',
+                type: 'fill',
+                source: 'highlighted-polygons',
+                paint: {
+                    'fill-color': '#FF0000', // Cor vermelha para destaque
+                    'fill-opacity': 0.7
+                }
+            });
+        }
+    } else {
+        // Se não houver interseções, remova a camada se existir
+        if (map.getLayer('highlighted-polygons')) {
+            map.removeLayer('highlighted-polygons');
+            map.removeSource('highlighted-polygons');
+        }
+    }
   });
+
+  map.on('draw.selectionchange', () => {
+
+    function addToCart(items) {
+
+      const badge = document.getElementById("badge");
+      // Mostra o badge, que estava oculto
+      badge.style.display = "inline-block";
+      // Atualiza o número de itens no badge para o tamanho atual do carrinho
+      badge.textContent = items.length;
+
+      const cartItems = document.getElementById("cart-items");
+
+      // Limpa o conteúdo atual do carrinho para evitar duplicações
+      cartItems.innerHTML = "";
+
+      // Itera sobre cada item do carrinho
+      items.forEach((item) => {
+        // Cria uma nova linha da tabela (tr) para cada item
+        const cart_tr = document.createElement("tr");
+
+        // Define o conteúdo HTML da nova linha do carrinho, com detalhes do item
+        // cada linha é um produto(carta)
+        cart_tr.innerHTML = `
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>
+            <span>${item.properties.name}</span>
+          </td>
+          <td>
+            <span>${item.properties.type}</span>
+          </td>
+          <td>
+            <input type="number" value="${1}" /> 
+          </td>
+          <td>
+            <span class="material-symbols-outlined icon-md-18">delete</span>
+          </td>`;
+
+        // Adiciona a nova linha à tabela de itens do carrinho
+        cartItems.appendChild(cart_tr);
+      });
+    }
+
+    if (isDrawing) {
+        isDrawing = false; // Define que a criação foi concluída
+        console.log('Desenho finalizado!');
+        addToCart(highlightedFeatures);
+    }
+  });
+
+  // Evento para deletar polígonos
+  map.on('draw.delete', (e) => {
+    if (map.getLayer('highlighted-polygons')) {
+      map.removeLayer('highlighted-polygons');
+      map.removeSource('highlighted-polygons');
+    }
+  });
+  
 });
